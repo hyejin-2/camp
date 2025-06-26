@@ -4,6 +4,7 @@
 <p align="center">
 </p>
 </p>
+필수 기능 실행 예시
   <img alt="콘솔 쇼핑몰 이미지" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FDUOKW%2FbtsOUEGl77l%2FAAAAAAAAAAAAAAAAAAAAAPytGLtkS9kuq1MVJB_bjSy301k8uiK97Ow9ZoS_HlyQ%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1751295599%26allow_ip%3D%26allow_referer%3D%26signature%3DuO1f3NlneWrOpZs81d2yFckxaco%253D"/>
 
 ## 과제 시나리오
