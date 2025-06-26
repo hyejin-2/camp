@@ -3,6 +3,8 @@
 </h1>
 <p align="center">
 </p>
+</p>
+  <img alt="콘솔 쇼핑몰 이미지" src=https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F83c75a39-3aba-4ba4-a792-7aefe4b07895%2Ff7c80ce5-6f07-4b70-a565-fc37311f41fa%2F%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2024-09-26_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%258C%25E1%2585%25A5%25E1%2586%25AB_9.54.34.png?table=block&id=21b2dc3e-f514-8159-888d-c97be98c9abc&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=1680&userId=105d872b-594c-8170-8a0a-000281261555&cache=v2/>
 
 ## 과제 시나리오
 ### 아래의 기능이 들어있는 콘솔 프로그램 만들기
