@@ -124,7 +124,7 @@ void main() {
         running = false;
       } else {
         print('종료하지 않습니다. 계속 진행합니다.');
-        exitPending = false; // 종료 상태 해제
+        exitPending = false;
       }
       continue;
     }
