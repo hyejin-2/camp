@@ -41,21 +41,28 @@ class ShoppingMall {
       return;
     }
 
-    int? quantity = int.tryParse(quantityInput);
-    if (quantity == null || quantity <= 0) {
-      print('0개보다 많은 개수의 상품만 담을 수 있어요 !');
-      return;
-    }
-
-    var selected = products.firstWhere(
-      (p) => p.name == name,
-      orElse: () => Product('', 0),
-    );
-
-    if (selected.name == '') {
+    //상품 이름이 목록에 있는지 확인 (contains 사용)
+    bool productExists = products.map((p) => p.name).contains(name);
+    if (!productExists) {
       print('입력값이 올바르지 않아요 !');
       return;
     }
+
+    int quantity;
+
+    // 상품 개수 입력값 처리 (try-catch 사용)
+    try {
+      quantity = int.parse(quantityInput);
+      if (quantity <= 0) {
+        print('0개보다 많은 개수의 상품만 담을 수 있어요 !');
+        return;
+      }
+    } catch (e) {
+      print('입력값이 올바르지 않아요 !');
+      return;
+    }
+
+    Product selected = products.firstWhere((p) => p.name == name); //상품 객체 가져오기
 
     // 장바구니에 추가
     cart[name] = (cart[name] ?? 0) + quantity;
@@ -105,10 +112,21 @@ class ShoppingMall {
   }
 }
 
+bool confirmExit() {
+  print('정말 종료하시겠습니까? [5]를 입력하면 종료됩니다.');
+  String? input = stdin.readLineSync();
+  if (input == '5') {
+    print('이용해 주셔서 감사합니다 ~ 안녕히 가세요 !');
+    return true;
+  } else {
+    print('종료하지 않습니다.');
+    return false;
+  }
+} //수정
+
 void main() {
   ShoppingMall mall = ShoppingMall();
   bool running = true;
-  bool exitPending = false;
 
   while (running) {
     print(
@@ -117,17 +135,6 @@ void main() {
     print('[5] 종료 확인 / [6] 장바구니 초기화 / [7] 장바구니 목록 보기');
     stdout.write('원하는 기능을 선택하세요: ');
     String? input = stdin.readLineSync();
-
-    if (exitPending) {
-      if (input == '5') {
-        print('이용해 주셔서 감사합니다 ~ 안녕히 가세요 !');
-        running = false;
-      } else {
-        print('종료하지 않습니다. 계속 진행합니다.');
-        exitPending = false;
-      }
-      continue;
-    }
 
     switch (input) {
       case '1':
@@ -140,12 +147,13 @@ void main() {
         mall.showTotal();
         break;
       case '4':
-        print('정말 종료하시겠습니까? [5]를 입력하면 종료됩니다.');
-        exitPending = true;
+        if (confirmExit()) {
+          running = false;
+        }
         break;
       case '5':
         print('이용해 주셔서 감사합니다 ~ 안녕히 가세요 !');
-        running = false;
+        running = false; // 바로 종료
         break;
       case '6':
         mall.clearCart();
