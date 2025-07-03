@@ -164,12 +164,22 @@
 ## 코드 실행 예시
   <img alt="전투 RPG 게임 이미지" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FlTVq5%2FbtsO41BiWpJ%2FAAAAAAAAAAAAAAAAAAAAAAKfqU7LLQbzNwJdmIhxdgWaIEyLu2mBiGByuMJ5v0Xu%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1753973999%26allow_ip%3D%26allow_referer%3D%26signature%3D3sQPKvMlxnyg0xn6NkGONMQpKlY%253D"/>
 
-### 1. 쇼핑몰 프로그램을 종료할 시 한번 더 종료할 것인지 물어보는 기능
-4를 입력하면 `정말 종료하시겠습니까?` 출력 이후 5를 입력하면 `이용해 주셔서 감사합니다 ~ 안녕히 가세요!` 출력 후 종료합니다.
-- 4를 입력 후 5를 입력하지 않고 다른 값 입력 시 `종료하지 않습니다.` 출력  
+<br/>
 
-방법
-- 4를 입력했을 때 dart:io 라이브러리의 stdin.readLineSync()를 한번 더 호출하여 입력을 받고 조건문 이용하여 처리
+## 도전 기능 가이드
+모든 정답 코드는 기존의 필수 기능 정답 코드를 반영합니다.  
+### 1. 캐릭터의 체력 증가 기능 추가
+[설명]  
+- 30%의 확률로 캐릭터에게 보너스 체력을 제공합니다.  
+
+[조건]
+- 게임이 시작되고 캐릭터의 데이터를 불러온 후 해당 기능을 호출합니다.
+- 30%의 확률로 `character`의 `health`를 `10` 증가 시킵니다.
+- 보너스 체력을 얻었을 시 아래와 같이 출력합니다.  
+출력 예시 `'보너스 체력을 얻었습니다! 현재 체력: ${character.health}'`
+
+[힌트]
+- Random 함수를 이용하여 확률 기능을 제공할 수 있습니다.
 
 ### 2. 장바구니를 초기화할 수 있는 기능
 6을 입력하면 `장바구니를 초기화합니다.` 출력 후 장바구니를 초기화합니다.
