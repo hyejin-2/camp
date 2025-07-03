@@ -5,7 +5,7 @@
 </p>
 </p>
 필수 기능 실행 에시
-  <img alt="콘솔 쇼핑몰 이미지" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FDUOKW%2FbtsOUEGl77l%2FAAAAAAAAAAAAAAAAAAAAAPytGLtkS9kuq1MVJB_bjSy301k8uiK97Ow9ZoS_HlyQ%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1751295599%26allow_ip%3D%26allow_referer%3D%26signature%3DuO1f3NlneWrOpZs81d2yFckxaco%253D"/>
+  <img alt="전투 RPG 게임 이미지" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FlTVq5%2FbtsO41BiWpJ%2FAAAAAAAAAAAAAAAAAAAAAAKfqU7LLQbzNwJdmIhxdgWaIEyLu2mBiGByuMJ5v0Xu%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1753973999%26allow_ip%3D%26allow_referer%3D%26signature%3D3sQPKvMlxnyg0xn6NkGONMQpKlY%253D"/>
 
 ## 과제 시나리오
 ### 아래의 기능을 활용한 전투 RPG 게임 프로그램 만들기
@@ -34,12 +34,12 @@
 
 ## Hint: 과제 요소 (필수 정의)
 ### 게임을 정의하기 위한 Game 클래스
-속성
+속성 (Property)
 - 캐릭터 (`Character`)
 - 몬스터 리스트 (`List<Monster>`)
 - 물리친 몬스터 개수(`int`): 몬스터의 리스트의 개수보다 클 수 없음
 
-메서드
+메서드 (Method)
 - 게임을 시작하는 메서드 (`startGame()`)  
 캐릭터의 체력이 0 이하가 되면 게임 종료  
 몬스터를 물리칠 때마다 다음 몬스터와 대결할 건지 선택 가능  
@@ -55,30 +55,47 @@
 - 랜덤으로 몬스터를 불러오는 메서드(`getRandomMonster()`)  
 `Random()` 을 사용하여 몬스터 리스트에서 랜덤으로 몬스터를 반환하여 대결
 
+힌트
+- 반복문을 사용하여 몬스터를 랜덤으로 뽑으며 순회하면서 대결 진행  
 
-<br/>
+### 캐릭터를 정의하기 위한 Character 클래스
+속성 (Property)
+- 이름 (`String`)
+- 체력 (`int`)
+- 공격력 (`int`)
+- 방어력 (`int`)
 
-## 필수 정의
-### 쇼핑몰을 정의하기 위한 ShoppingMall 클래스
-속성
-- 판매하는 상품 목록 (List<Product>)
-- 장바구니에 담은 상품들의 총 가격 (int)
+메서드 (Method)
+- 공격 메서드 (`attackMonster(Monster monster)`)  
+몬스터에게 공격을 가하여 피해를 입힙니다.
+- 방어 메서드 (`defend()`)  
+방어 시 특정 행동 수행  
+(예) 대결 상대인 몬스터가 입힌 데미지만큼 캐릭터의 체력을 상승시킴  
+- 상태를 출력하는 메서드 (`showStatus()`)  
+캐릭터의 현재 체력, 공격력, 방어력을 매 턴마다 출력
 
-메서드
-- 상품 목록을 출력하는 메서드 (showProducts())
-- 상품을 장바구니에 담는 메서드 (addToCart())
-- 장바구니에 담은 상품의 총 가격을 출력하는 메서드 (showTotal())
+### 몬스터를 정의하기 위한 Monster 클래스
+속성 (Property)
+- 이름 (`String`)
+- 체력 (`int`)
+- 랜덤으로 지정할 공격력 범위 최대값 (`int`)  
+몬스터의 공격력은 캐릭터의 방어력보다 작을 수 없음  
+랜덤으로 지정하여 캐릭터의 방어력과 랜덤 값 중 최대값으로 설정해  
+- 방어력(`int`) = 0  
+몬스터의 방어력은 0이라고 가정
 
-### 상품을 정의하기 위한 Product 클래스
-속성
-- 상품 이름 (String)
-- 상품 1개당 가격 (int)
+메서드 (Method)
+- 공격 메서드 (`attackCharacter(Character character)`)  
+캐릭터에게 공격을 가하여 피해를 입힘  
+캐릭터에게 입히는 데미지는 몬스터의 공격력에서 캐릭터의 방어력을 뺀 값이며, 최소 데미지는 0 이상임  
+- 상태를 출력하는 메서드 (`showStatus()`)  
+몬스터의 현재 체력과 공격력을 매 턴마다 출력합니다.
 
 <br/>
 
 ## 필수 기능 가이드
 
-### 1. 판매하는 상품 목록을 볼 수 있는 기능
+### 1. 파일로부터 데이터 읽어오기 기능
 1 을 입력했을 때 판매하고 있는 상품 목록을 출력합니다.
 - 출력 형태 : `상품명 / 상품 1개당 가격원`  
 
