@@ -4,8 +4,6 @@
 <p align="center">
 </p>
 </p>
-필수 기능 실행 에시
-  <img alt="전투 RPG 게임 이미지" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FlTVq5%2FbtsO41BiWpJ%2FAAAAAAAAAAAAAAAAAAAAAAKfqU7LLQbzNwJdmIhxdgWaIEyLu2mBiGByuMJ5v0Xu%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1753973999%26allow_ip%3D%26allow_referer%3D%26signature%3D3sQPKvMlxnyg0xn6NkGONMQpKlY%253D"/>
 
 ## 과제 시나리오
 ### 아래의 기능을 활용한 전투 RPG 게임 프로그램 만들기
@@ -96,55 +94,75 @@
 ## 필수 기능 가이드
 
 ### 1. 파일로부터 데이터 읽어오기 기능
-1 을 입력했을 때 판매하고 있는 상품 목록을 출력합니다.
-- 출력 형태 : `상품명 / 상품 1개당 가격원`  
+설명  
+- 게임(`Game` 클래스) 시작 시 캐릭터와 몬스터의 스탯을 파일에서 읽어옵니다
+  <img alt="txt이미지" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2Fdel0d3%2FbtsO2kC4IAh%2FAAAAAAAAAAAAAAAAAAAAAKXAUewK3KPpSlrt694DST1XPabwuML8a1cW7eNd9LyV%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1753973999%26allow_ip%3D%26allow_referer%3D%26signature%3D69O3at%252BeZrp1denchx1wOYDAYWU%253D"/>
 
-방법
-- 반복문을 통해 상품의 정보를 하나씩 출력
+조건
+- 캐릭터의 스탯은 `characters.txt` 파일에서 읽어옵니다.  
+- 몬스터들의 스탯은 `monsters.txt` 파일에서 읽어옵니다.  
+- 파일의 데이터는 CSV 형식으로 되어 있습니다.  
+- 예시  
+캐릭터 → 체력, 공격력, 방어력  
+몬스터 →이름, 체력, 공격력 최대값(설정된 최대값에서 `Random()` 을 사용하여 공격력 지정)
 
-### 2. 상품을 장바구니에 담을 수 있는 기능
-2 를 입력했을 때 장바구니에 담을 상품 이름 (String) 과 상품 개수 (int) 를 입력 받습니다.  
-- 입력한 상품의 이름이 상품 목록에 있지 않거나 상품의 개수가 0 이하의 값이면 장바구니에 담기지 않습니다.  
-상품 목록에 없는 상품의 이름을 입력한 경우 `입력값이 올바르지 않아요 !` 를 출력합니다.  
-상품의 개수를 숫자 형태로 입력하지 않은 경우 `입력값이 올바르지 않아요 !` 를 출력합니다.  
-입력한 상품의 개수가 0 이하의 수인 경우 `0개보다 많은 개수의 상품만 담을 수 있어요 !` 를 출력합니다.
-- 입력한 상품의 이름과 상품의 개수가 올바른 값이면 장바구니에 담깁니다.  
-이 경우 `장바구니에 상품이 담겼어요 !` 를 출력합니다.  
+힌트
+- dart:io 라이브러리의 File 클래스를 사용하여 파일을 읽습니다.  
+- `Rsplit()`R 메서드를 사용하여 CSV 데이터를 분리한 후 변수(health, attack, defense)에 선언해줍니다.  
+- 심화: 동기/비동기 두가지 방식으로 파일을 불러올 수 있습니다.
+
+### 2. 사용자로부터 캐릭터 이름 입력받기 기능
+설명
+- 게임 시작 시 사용자가 캐릭터의 이름을 입력합니다.
+
+조건
+- 이름은 빈 문자열이 아니어야 합니다.
+- 이름에는 특수문자나 숫자가 포함되지 않아야 합니다.
+- 허용 문자: 한글, 영문 대소문자
+
+힌트
+- (도전) 정규표현식 등을 사용하면 조금 더 편하게 제한된 이름만 입력받을 수 있습니다.  
+`RegExp(r'^[a-zA-Z가-힣]+$')`
   
-방법
-- 조건문과 try-catch 문을 통해 입력값에 대한 처리
-- contains()를 통해 입력한 상품의 이름이 상품 목록에 있는지 판별
-- int.parse() 를 통해 입력한 상품의 개수를 int 타입으로 변환
-- 장바구니에 담은 상품들의 총 가격을 담기 위한 인스턴스 변수를 ShoppingMall 클래스에 정의한 후 그 인스턴스 변수의 값에 더해줌
+### 3. 게임 종료 후 결과를 파일에 저장하는 기능
+설명
+- 게임 종료 후 결과를 파일에 저장합니다.
 
-### 3. 장바구니에 담은 상품들의 총 가격을 볼 수 있는 기능
-3 을 입력했을 때 구매자가 장바구니에 담은 상품들의 총 가격 (int) 을 계산하여 출력합니다.
-- 출력 형태: `장바구니에 가격원 어치를 담으셨네요 !`  
-- 예시: `장바구니에 35000원 어치를 담으셨네요 !`
+조건
+- `결과를 저장하시겠습니까? (y/n)`를 출력합니다.  
+- 사용자의 입력에 따라 결과를 result.txt 파일에 저장합니다.  
+- 저장되는 내용은 캐릭터의 이름, 남은 체력, 게임 결과(승리/패배)*입니다.
 
-### 4. 쇼핑몰 프로그램을 종료할 수 있는 기능
-4 를 입력했을 때 쇼핑몰 프로그램이 종료됩니다.  
-- `이용해 주셔서 감사합니다 ~ 안녕히 가세요 !` 출력 후 프로그램을 종료합니다.  
+힌트
+- File 클래스의 `writeAsStringSync()` 을 이용하여 파일을 저장할 수 있습니다.
 
-방법
-- while 문을 사용하고, 프로그램을 종료하기 위한 bool 타입의 변수로 while 문을 제어합니다.  
+### 4. 캐릭터와 몬스터의 공통되는 부분을 추상화하여, 추상 클래스 구현
+설명
+- Character 클래스와 Monster 클래스에서 공통되는 부분을 추상화하여, 이를 추상 클래스로 만들고,  
+두 클래스가 이 추상 클래스를 상속받도록 코드를 구현합니다.
+
+조건
+- 추상 클래스에서 공통으로 사용되는 변수 선언
+- 상속 받는 클래스에서 함수 재정의 하기. 함수 재정의는 아래와 같은 형식
+  <img alt="4_조건이미지" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2F0Erhw%2FbtsO4jJcUBT%2FAAAAAAAAAAAAAAAAAAAAAO6uUFarXLpM71AKtb19wGszmxbSQov5pWKYpQb2NGCl%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1753973999%26allow_ip%3D%26allow_referer%3D%26signature%3Dw2GHXRSzjOWMV6%252FNNwxI1QnGYpk%253D"/>
+
+힌트
+- abstract class 키워드를 사용하여 추상 클래스를 선언
+- extends 키워드를 사용하여 클래스를 상속
+- @override 어노테이션을 사용하여 메서드를 재정의
+- 몬스터 클래스의 경우 방어력을 0으로 설정
 
 <br/>
 
 ## 주의 사항
-- 터미널이나 명령 프롬프트 등의 명령줄 인터페이스를 사용하여 구현합니다.
-- 입력 받는 기능은 dart:io 라이브러리의 stdin.readLineSync() 를 사용합니다.  
-(stdin.readLineSync() 는 입력한 값을 String? 타입의 값으로 반환하는 메서드입니다.)
-- 쇼핑몰에는 5개 이상의 상품이 있어야 하며, 생성자를 통해 생성합니다.
-- 4 를 입력하기 전까지는 쇼핑몰의 3가지 기능을 계속 사용할 수 있어야 합니다.
-- 1, 2, 3, 4, 5, 6, 7 외의 값을 입력했을 때 `지원하지 않는 기능입니다 ! 다시 시도해 주세요 ..` 를 출력합니다.
-- 1, 2, 3, 4, 5, 6, 7 을 입력 받을 때 각 숫자가 어떤 기능을 하는지 출력합니다.  
-| **1** 상품 목록 보기 | **2** 장바구니에 담기 | **3** 장바구니에 담긴 상품의 총 가격 보기 | **4** 프로그램 종료 |  
-| **5** 종료 확인 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | **6** 장바구니 초기화 |  **7** 장바구니 목록 보기 |
+- 예외 처리를 통해 파일이 없거나 잘못된 형식의 데이터를 읽었을 때 프로그램이 종료되지 않도록 합니다.
+- 사용자 입력에 대한 검증을 철저히 하여 예상치 못한 입력으로 인한 오류를 방지합니다.
+- 코드의 재사용성과 가독성을 높이기 위해 함수와 클래스를 적절히 활용합니다.
 
 <br/>
 
-## 도전 기능 가이드
+## 코드 실행 예시
+  <img alt="전투 RPG 게임 이미지" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FlTVq5%2FbtsO41BiWpJ%2FAAAAAAAAAAAAAAAAAAAAAAKfqU7LLQbzNwJdmIhxdgWaIEyLu2mBiGByuMJ5v0Xu%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1753973999%26allow_ip%3D%26allow_referer%3D%26signature%3D3sQPKvMlxnyg0xn6NkGONMQpKlY%253D"/>
 
 ### 1. 쇼핑몰 프로그램을 종료할 시 한번 더 종료할 것인지 물어보는 기능
 4를 입력하면 `정말 종료하시겠습니까?` 출력 이후 5를 입력하면 `이용해 주셔서 감사합니다 ~ 안녕히 가세요!` 출력 후 종료합니다.
